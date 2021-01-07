@@ -320,6 +320,12 @@ def run_cases_host():
 	print("Running test cases as a host")
 	run_cases("host")
 	# For host specified test case, create here
+	case = Case("blogbench_read", "blogbench -d /mnt/stateful_partition/bench -c 10 -i 10 -r 10 -w 10 -W 10 -s 10", "host")
+	g_results_list[case.case_name] = case.result_parser(r"[0-9]*\.[0-9]+", 22)
+
+	case = Case("blogbench_write", "blogbench -d /mnt/stateful_partition/bench -c 10 -i 10 -r 10 -w 10 -W 10 -s 10", "host")
+	g_results_list[case.case_name] = case.result_parser(r"\d+", 22)
+
 	case = Case("stream_Triad", "/mnt/stateful_partition/stream/stream", "host")
 	# g_results_list[case.case_name + "_Copy"] = case.result_parser(r"[0-9]*\.[0-9]+", 19)
 	# g_results_list[case.case_name + "_Scale"] = case.result_parser(r"[0-9]*\.[0-9]+", 20)
