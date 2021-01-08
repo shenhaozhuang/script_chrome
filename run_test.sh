@@ -1,4 +1,7 @@
 #!/bin/bash
+# vim environment.json
+# ./run_test.sh hostIP host/guest/chroot/android
+# Author: shenhaox.zhuang
 set -e
 
 
