@@ -371,7 +371,7 @@ def run_cases_guest():
 		case = Case(game, "su ikvmgt -c 'glretrace /home/ikvmgt/gfxbench4/%s'"%game, "guest")
 		g_results_list[case.case_name] = case.result_parser(r'([0-9]+\.[0-9]+) fps', 0)
 
-	case = Case("nexuiz", "su ikvmgt -c 'nexuiz -benchmark demos/demo1 -nosound'", "guest")
+	case = Case("nexuiz", "su ikvmgt -c 'nexuiz -benchmark demos/demo1'", "guest")
 	g_results_list[case.case_name] = case.result_parser(r"[0-9]{2}[.][0-9]{7}", -1)
 
 	case = Case("openarena", "su ikvmgt -c 'openarena +exec anholt'", "guest")
@@ -415,7 +415,7 @@ def run_cases_android():
 def run_cases_chroot():
 	print("Running test cases as a chroot")
 	# For chroot specified test case, create here
-	case = Case("nexuiz", "su intel -c 'nexuiz -benchmark demos/demo1 -nosound'", "guest")
+	case = Case("nexuiz", "su intel -c 'nexuiz -benchmark demos/demo1'", "guest")
 	g_results_list[case.case_name] = case.result_parser(r"([0-9]+\.[0-9]+) fps", 0)
 
 	case = Case("openarena", "su intel -c 'openarena +exec anholt'", "guest")
