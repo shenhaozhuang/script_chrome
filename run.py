@@ -357,7 +357,13 @@ def run_cases_guest():
 	# For guest specified test case, create here
 	case = Case("nexuiz", "su ikvmgt -c 'nexuiz -benchmark demos/demo1'", "guest")
 	g_results_list[case.case_name] = case.result_parser(r"[0-9]{2}[.][0-9]{7}", -1)
-	
+
+	case = Case("netperf-tcp_stream", "netperf -H 192.168.3.7 -t tcp_stream -l 60", "guest")
+	g_results_list[case.case_name] = case.result_parser(r'[0-9]{3,}\.[0-9]+', 6)
+
+	case = Case("netperf-rr", "netperf -H 192.168.3.7 -t tcp_rr -l 60", "guest")
+	g_results_list[case.case_name] = case.result_parser(r'[0-9]{3,}\.[0-9]+', 6)
+
 	run_cases("guest")
 
 	gfxbench4_list=[
@@ -390,12 +396,6 @@ def run_cases_guest():
 
 	case = Case("iperf3", "iperf3 -c 192.168.3.7 -t 60 -i 60", "guest")
 	g_results_list[case.case_name] = case.result_parser(r'[0-9]{3,}', 7)
-
-	case = Case("netperf-tcp_stream", "netperf -H 192.168.3.7 -t tcp_stream -l 60", "guest")
-	g_results_list[case.case_name] = case.result_parser(r'[0-9]{3,}\.[0-9]+', 6)
-
-	case = Case("netperf-rr", "netperf -H 192.168.3.7 -t tcp_rr -l 60", "guest")
-	g_results_list[case.case_name] = case.result_parser(r'[0-9]{3,}\.[0-9]+', 6)
 
 	case = Case("kernelCompilation", "cd /home/ikvmgt/linux/ && make clean && time make --directory=/home/ikvmgt/linux/ -j4", "guest")
 	time_list = case.result_parser(r'[0-9]+:[0-9]+\.[0-9]+', -2).split(":")
