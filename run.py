@@ -397,7 +397,6 @@ def run_cases_guest():
 	g_results_list[case.case_name] = case.result_parser(r'[0-9]{3,}', 7)
 
 	case = Case("kernelCompilation", "cd /home/ikvmgt/linux/ && make clean && time make --directory=/home/ikvmgt/linux/ -j4", "guest")
-	time_list = case.result_parser(r'[0-9]+:[0-9]+\.[0-9]+', -2).split(":")
 	g_results_list[case.case_name] = int(case.result_parser(r'[0-9]+:[0-9]+\.[0-9]+', -2).split(":")[0])*60 + float(case.result_parser(r'[0-9]+:[0-9]+\.[0-9]+', -2).split(":")[1])
 	# g_results_list[case.case_name + "_user"] = case.result_parser(r'^[0-9]+\.[0-9]+', -2)
 	# g_results_list[case.case_name + "_system"] = case.result_parser(r' [0-9]+\.[0-9]+', -2).strip()
@@ -422,8 +421,8 @@ def run_cases_chroot():
 	g_results_list[case.case_name] = case.result_parser(r"([0-9]+\.[0-9]+) fps", 0)
 
 	gfxbench4_list=[
-	# 'car-chase.trace',
-	# 'manhattan.trace', 
+	'car-chase.trace',
+	'manhattan.trace', 
 	't-rex.trace',
 	]
 	for game in gfxbench4_list:
