@@ -504,7 +504,10 @@ def main():
 	g_ip_host = args.ip_host
 	g_ip_guest = args.ip_guest
 	g_ip_chroot = args.ip_chroot
-	g_test_cases = args.test_cases
+	if args.test_cases:
+		g_test_cases = args.test_cases[0]
+	else:
+		g_test_cases = args.test_cases
 	g_case_pattern= args.case_pattern
 
 	# Sanity Check
