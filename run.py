@@ -346,9 +346,8 @@ def run_cases_host():
 	case = Case("netperf-rr", "netperf -H 192.168.3.7 -t tcp_rr -l 60", "host")
 	g_results_list[case.case_name] = case.result_parser(r'[0-9]{3,}\.[0-9]+', 6)
 
-	case = Case("kernelCompilation", "cd /home/ikvmgt/linux/ && make clean && time make --directory=/mnt/statefule_partation/linux/ -j4", "host")
-	time_list = case.result_parser(r'[0-9]+:[0-9]+\.[0-9]+', -2).split(":")
-	g_results_list[case.case_name] = int(time_list[0])*60 + float(time_list[1])
+	case = Case("kernelCompilation", "cd /mnt/statefule_partation/linux/ && make clean && time make --directory=/mnt/statefule_partation/linux/ -j4", "host")
+	g_results_list[case.case_name] = int(case.result_parser(r'[0-9]+:[0-9]+\.[0-9]+', -2).split(":")[0])*60 + float(case.result_parser(r'[0-9]+:[0-9]+\.[0-9]+', -2).split(":")[1])
 	# g_results_list[case.case_name + "_user"] = case.result_parser(r'^[0-9]+\.[0-9]+', -2)
 	# g_results_list[case.case_name + "_system"] = case.result_parser(r' [0-9]+\.[0-9]+', -2)
 
@@ -399,7 +398,7 @@ def run_cases_guest():
 
 	case = Case("kernelCompilation", "cd /home/ikvmgt/linux/ && make clean && time make --directory=/home/ikvmgt/linux/ -j4", "guest")
 	time_list = case.result_parser(r'[0-9]+:[0-9]+\.[0-9]+', -2).split(":")
-	g_results_list[case.case_name] = int(time_list[0])*60 + float(time_list[1])
+	g_results_list[case.case_name] = int(case.result_parser(r'[0-9]+:[0-9]+\.[0-9]+', -2).split(":")[0])*60 + float(case.result_parser(r'[0-9]+:[0-9]+\.[0-9]+', -2).split(":")[1])
 	# g_results_list[case.case_name + "_user"] = case.result_parser(r'^[0-9]+\.[0-9]+', -2)
 	# g_results_list[case.case_name + "_system"] = case.result_parser(r' [0-9]+\.[0-9]+', -2).strip()
 
