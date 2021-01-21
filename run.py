@@ -378,7 +378,7 @@ def run_cases_guest():
 	g_results_list[case.case_name] = case.result_parser(r"[0-9]{2,}\.+[0-9]+", -11)
 
 	case = Case("glmark2", "su ikvmgt -c 'glmark2'", "guest")
-	g_results_list[case.case_name] = case.result_parser(r'[0-9]{2,}\.?[0-9]?', 42)
+	g_results_list[case.case_name] = case.result_parser(r'glmark2 Score:\s*([0-9]+)', 0)
 
 	case = Case("geekbench_Single-Core-Score", "/data/local/tmp/geekbench_x86_64 --cpu --no-upload --single-core", "guest")
 	g_results_list[case.case_name] = case.result_parser(r"Single-Core Score\s*([0-9]+)", 0)
@@ -430,7 +430,7 @@ def run_cases_chroot():
 		g_results_list[case.case_name] = case.result_parser(r'([0-9]+\.[0-9]+) fps', 0)
 
 	case = Case("glmark2", "su intel -c 'glmark2'", "guest")
-	g_results_list[case.case_name] = case.result_parser(r'[0-9]{2,}\.?[0-9]?', 42)
+	g_results_list[case.case_name] = case.result_parser(r'glmark2 Score:\s*([0-9]+)', 0)
 
 def run_cases(is_guest):
 	######## Add test cases here! For common test cases #############
