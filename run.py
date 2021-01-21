@@ -97,7 +97,7 @@ class Case:
 		if self.is_guest == "guest":
 			self.conn_server_prepare = paramiko.SSHClient()
 			self.conn_server_prepare.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-			self.conn_server_prepare.connect(g_ip_host, 22, username='root', password='test0000', timeout=3)
+			self.conn_server_prepare.connect(g_ip_host, 22, username='root', password='test0000')
 
 			self.conn_server_cpu = paramiko.SSHClient()
 			self.conn_server_cpu.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -346,7 +346,7 @@ def run_cases_host():
 	case = Case("netperf-rr", "netperf -H 192.168.3.7 -t tcp_rr -l 60", "host")
 	g_results_list[case.case_name] = case.result_parser(r'[0-9]{3,}\.[0-9]+', 6)
 
-	case = Case("kernelCompilation", "cd /mnt/statefule_partation/linux/ && make clean && time make --directory=/mnt/stateful_partition/linux/ -j4", "host")
+	case = Case("kernelCompilation", "cd /mnt/stateful_partition/linux/ && make clean && time make --directory=/mnt/stateful_partition/linux/ -j4", "host")
 	g_results_list[case.case_name] = int(case.result_parser(r'[0-9]+:[0-9]+\.[0-9]+', -2).split(":")[0])*60 + float(case.result_parser(r'[0-9]+:[0-9]+\.[0-9]+', -2).split(":")[1])
 	# g_results_list[case.case_name + "_user"] = case.result_parser(r'^[0-9]+\.[0-9]+', -2)
 	# g_results_list[case.case_name + "_system"] = case.result_parser(r' [0-9]+\.[0-9]+', -2)
